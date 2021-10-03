@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/test.yaml'
+      - '.pre-commit-config.yaml'
       - 'poetry.lock'
       - 'rsserpent/**'
       - 'tests/**'
@@ -12,6 +13,7 @@ on:
       - 'master'
     paths:
       - '.github/workflows/test.yaml'
+      - '.pre-commit-config.yaml'
       - 'poetry.lock'
       - 'rsserpent/**'
       - 'tests/**'
@@ -31,7 +33,9 @@ jobs:
           python-version: 3.9
       - uses: actions/cache@v2
         with:
-          path: ${{ env.PRE_COMMIT_HOME }}
+          path: |
+            .mypy_cache
+            ${{ env.PRE_COMMIT_HOME }}
           key: ${{ hashFiles('.pre-commit-config.yaml') }}
       - uses: actions/cache@v2
         with:
@@ -47,8 +51,9 @@ jobs:
           poetry install
       - name: "Run Pre-Commit"
         run: |
-          poetry run pre-commit install -t pre-commit -t commit-msg
-          poetry run pre-commit run --all-files
+          source .venv/bin/activate
+          pre-commit install
+          pre-commit run --all-files
 
   test:
     runs-on: ubuntu-latest
