@@ -37,9 +37,6 @@ deps = {
     ],
 }
 
-if sys.argv[1] == "flake8":
-    subprocess.call(["pip", "install", "-U", *deps["flake8"]])
-    subprocess.call(["flake8", ".", "--jobs=1"])
-elif sys.argv[1] == "mypy":
-    subprocess.call(["pip", "install", "-U", *deps["mypy"]])
-    subprocess.call(["mypy", "."])
+if __name__ == "__main__":
+    subprocess.call(["pip", "install", "-U", *deps[sys.argv[1]]])
+    exit(subprocess.call([sys.argv[1], "."]))

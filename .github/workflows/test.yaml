@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - '.github/workflows/test.yaml'
-      - '.pre-commit-config.yaml'
       - 'poetry.lock'
       - 'rsserpent/**'
       - 'tests/**'
@@ -13,7 +12,6 @@ on:
       - 'master'
     paths:
       - '.github/workflows/test.yaml'
-      - '.pre-commit-config.yaml'
       - 'poetry.lock'
       - 'rsserpent/**'
       - 'tests/**'
