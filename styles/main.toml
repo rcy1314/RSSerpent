@@ -95,7 +95,7 @@ yaml = """
   - repo: https://github.com/pre-commit/mirrors-mypy
     hooks:
       - id: mypy
-        args: []
+        entry: ./run-mypy.sh
   - repo: https://github.com/PyCQA/flake8
     hooks:
       - id: flake8

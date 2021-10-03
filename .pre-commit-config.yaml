@@ -49,19 +49,7 @@ repos:
     hooks:
       - id: mypy
         name: Type Check
-        args: []
-        # As `mypy` runs in an isolated environment, it is necessary to manually specify
-        # some libraries of the current (poetry) environment for `mypy` to work properly.
-        additional_dependencies:
-          - arrow
-          - httpx
-          - hypothesis
-          - importlib-metadata
-          - pydantic
-          - pytest
-          - pytest-asyncio
-          - starlette
-          - types-dataclasses
+        entry: ./scripts/pre-commit.py
   - repo: https://github.com/PyCQA/flake8
     rev: 3.9.2
     hooks:
