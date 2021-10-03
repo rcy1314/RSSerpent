@@ -22,40 +22,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  pre-commit:
-    runs-on: ubuntu-latest
-    env:
-      PRE_COMMIT_HOME: .pre-commit
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - uses: actions/cache@v2
-        with:
-          path: |
-            .mypy_cache
-            ${{ env.PRE_COMMIT_HOME }}
-          key: ${{ hashFiles('.pre-commit-config.yaml') }}
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.cache/pip
-            .venv
-          key: ${{ hashFiles('poetry.lock') }}
-      - name: "Setup Poetry"
-        run: |
-          pip install --upgrade pip
-          pip install --user poetry
-          poetry config virtualenvs.in-project true
-          poetry install
-      - name: "Run Pre-Commit"
-        run: |
-          source .venv/bin/activate
-          pre-commit install
-          pre-commit run --all-files
-
-  test:
+  run:
     runs-on: ubuntu-latest
     env:
       HYPOTHESIS_PROFILE: ci
